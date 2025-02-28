@@ -1861,6 +1861,14 @@ export class Chess {
      * example for html usage: .pgn({ max_width: 72, newline_char: "<br />" })
      */
 
+    /**
+     * If Chess960 is enabled and the 'Variant' header already exists, assume
+     * the header is correct and do not modify it, otherwise set it.
+     */
+    if (this.isVariantChess960() && !this.getHeaders()['Variant']) {
+      this.setHeader('Variant', 'Chess960')
+    }
+
     const result: string[] = []
     let headerExists = false
 
@@ -2136,6 +2144,13 @@ export class Chess {
         // don't clear the headers when loading
         this.load(headers['FEN'], { preserveHeaders: true })
       }
+    }
+
+    if (
+      headers['Variant'] === 'Chess960' ||
+      headers['Variant'] === 'Fischerandom'
+    ) {
+      this.setVariantChess960()
     }
 
     /*
