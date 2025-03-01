@@ -1608,13 +1608,7 @@ export class Chess {
     if (typeof move === 'string') {
       moveObj = this._moveFromSan(move, strict)
     } else if (typeof move === 'object') {
-      /**
-       * In certain Chess960 positions, a castling-move and a normal king-move
-       * will have the same 'from' and 'to' squares. Sorting the moves by
-       * flags puts the castling-move before the normal-move which allows the
-       * castling-move to be checked before the normal move in the loop below.
-       */
-      const moves = this._moves().sort((a, b) => b.flags - a.flags)
+      const moves = this._filterMoves(this._moves(), move)
 
       // convert the pretty move object to an ugly move object
       for (let i = 0, len = moves.length; i < len; i++) {
@@ -1623,16 +1617,8 @@ export class Chess {
           move.to === algebraic(moves[i].to) &&
           (!('promotion' in moves[i]) || move.promotion === moves[i].promotion)
         ) {
-          if (
-            'castle960Flag' in move &&
-            move.castle960Flag === moves[i].flags
-          ) {
-            moveObj = moves[i]
-            break
-          } else {
-            moveObj = moves[i]
-            break
-          }
+          moveObj = moves[i]
+          break
         }
       }
     }
@@ -2770,7 +2756,7 @@ export class Chess {
 
     return {
       b: {
-        king: bKing, // Column [0-7] of the black king, or zero if king is not in row 8.
+        king: bKing, // Column [0-7] of the black king, or -1 if king is not in row 8.
         kingsideRooks: bKingsideRooks, // Columns [0-7] of all rooks on the kingside.
         queensideRooks: bQueensideRooks, // Columns [0-7] of all rooks on the queenside.
         leftmostQueensideRookSq: Ox88.a8 + bQueensideRooks[0], // The Ox88 square of leftmost queenside rook or undefined if no king or no rook.
@@ -2865,6 +2851,19 @@ export class Chess {
       }
     }
     return false
+  }
+
+  _filterMoves(moves: InternalMove[], move: PreMove): InternalMove[] {
+    if (this.isVariantChess960()) {
+      return move.castle960Flag
+        ? moves.filter(
+            (mv) => mv.flags & (BITS.KSIDE_CASTLE | BITS.QSIDE_CASTLE),
+          )
+        : moves.filter(
+            (mv) => mv.flags & (~BITS.KSIDE_CASTLE | ~BITS.QSIDE_CASTLE),
+          )
+    }
+    return moves
   }
 
   /**
