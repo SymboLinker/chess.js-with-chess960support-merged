@@ -2730,8 +2730,9 @@ export class Chess {
     const range = (start: number, end: number) =>
       new Array(end - start + 1).fill(undefined).map((_, i) => i + start)
 
-    const row1 = range(Ox88.a1, Ox88.h1).map((i) => this._board[i] || {})
-    const row8 = range(Ox88.a8, Ox88.h8).map((i) => this._board[i] || {})
+    const emptySq = { type: '', color: '' }
+    const row1 = range(Ox88.a1, Ox88.h1).map((i) => this._board[i] || emptySq)
+    const row8 = range(Ox88.a8, Ox88.h8).map((i) => this._board[i] || emptySq)
 
     // Get the columns [0-7] of the kings and rooks, or -1 if not found.
     const bKing = row8
