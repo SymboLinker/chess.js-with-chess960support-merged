@@ -65,3 +65,14 @@ test('should not output Variant header when Variant header exists', () => {
   expect(chess.getHeaders()['Variant']).toEqual('Sometext')
   expect(chess.pgn().trim()).toEqual(pgn.trim())
 })
+
+test('should accept Chess960 castling rights in FEN header of PGN', () => {
+  const pgnIn = `
+[SetUp "1"]
+[FEN "r3k2r/8/8/8/8/8/8/R3K2R w HAha - 0 1"]
+[Variant "Chess960"]
+`
+  const chess = new Chess()
+  chess.loadPgn(pgnIn)
+  expect(chess.isVariantChess960()).toBeTruthy()
+})

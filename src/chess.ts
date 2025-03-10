@@ -2108,6 +2108,13 @@ export class Chess {
       this.header(key, headers[key])
     }
 
+    if (
+      headers['Variant'] === 'Chess960' ||
+      headers['Variant'] === 'Fischerandom'
+    ) {
+      this.setVariantChess960()
+    }
+
     /*
      * the permissive parser should attempt to load a fen tag, even if it's the
      * wrong case and doesn't include a corresponding [SetUp "1"] tag
@@ -2130,13 +2137,6 @@ export class Chess {
         // don't clear the headers when loading
         this.load(headers['FEN'], { preserveHeaders: true })
       }
-    }
-
-    if (
-      headers['Variant'] === 'Chess960' ||
-      headers['Variant'] === 'Fischerandom'
-    ) {
-      this.setVariantChess960()
     }
 
     /*
