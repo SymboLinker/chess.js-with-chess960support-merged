@@ -816,7 +816,7 @@ export class Chess {
       const wCastlingRights = this.getCastlingRights(WHITE)
       ROOKS.w = []
       ROOKS.b = []
-      // if (this._castling.b & BITS.QSIDE_CASTLE && rk.bqs.length) {
+
       if (bCastlingRights[KING] && rk.bks.length) {
         ROOKS[BLACK].push({ square: rk.bks[0], flag: BITS.KSIDE_CASTLE })
       }
