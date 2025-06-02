@@ -1,23 +1,20 @@
-# chess.js
+# chess.js v1.1 with chess960support merged
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jhlywa/chess.js/node.js.yml)](https://github.com/jhlywa/chess.js/actions)
-[![npm](https://img.shields.io/npm/v/chess.js?color=blue)](https://www.npmjs.com/package/chess.js)
-[![npm](https://img.shields.io/npm/dm/chess.js)](https://www.npmjs.com/package/chess.js)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+THIS IS NOT THE OFFICIAL REPO, but v1.1 of that repo with pull request https://github.com/jhlywa/chess.js/pull/493 merged into it.
+
+Regarding installation: copy the 'chess.ts' file form the 'src' folder into your repo and start using it.
+
+This version is used at [blindfold-chess.github.io](https://blindfold-chess.github.io).
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 chess.js is a TypeScript chess library used for chess move
 generation/validation, piece placement/movement, and check/checkmate/stalemate
 detection - basically everything but the AI.
 
 chess.js has been extensively tested in node.js and most modern browsers.
-
-## Installation
-
-Run the following command to install the most recent version of chess.js from
-NPM:
-
-```sh
-npm install chess.js
-```
 
 ## Importing
 
