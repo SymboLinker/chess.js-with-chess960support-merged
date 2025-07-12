@@ -6,8 +6,6 @@ THIS IS NOT THE OFFICIAL REPO, but v1.1 of that repo with pull request https://g
 
 Regarding installation: copy the 'chess.ts' file form the 'src' folder into your repo and start using it.
 
-This version is used at [blindfold-chess.github.io](https://blindfold-chess.github.io).
-
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 chess.js is a TypeScript chess library used for chess move
